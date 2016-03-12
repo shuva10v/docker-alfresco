@@ -1,0 +1,11 @@
+mode=unattended
+disable-components=libreofficecomponent,postgres
+
+prefix=/opt/alfresco
+
+jdbc_url=jdbc:postgresql://postgres:5432/alfresco
+jdbc_driver=org.postgresql.Driver
+jdbc_database=alfresco
+jdbc_username=alfresco
+jdbc_password=alfresco
+baseunixservice_install_as_service=0

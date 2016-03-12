@@ -1,0 +1,25 @@
+datacontainer:
+    image: busybox
+    volumes:
+        - /opt/alfresco/alf_data/contentstore
+        - /var/lib/postgresql/data
+    command: chmod -R 777 /var/lib/tomcat7/alf_data/contentstore
+postgres:
+    image: postgres
+    environment:
+        POSTGRES_USER: alfresco
+        POSTGRES_PASSWORD: alfresco
+    volumes_from:
+        - datacontainer
+alfresco:
+    image: alfresco
+    volumes_from:
+        - datacontainer
+    ports:
+        - "127.0.0.1:8080:8080"
+        - "127.0.0.1:8009:8009"
+    links:
+        - postgres
+        - postgres:postgres
+    extra_hosts:
+        - "smtp.example.com:172.17.42.1"
